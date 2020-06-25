@@ -5,7 +5,7 @@ __pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-media
+/media
 
 *.py[cod]
 *$py.class
@@ -96,3 +96,5 @@ dmypy.json
 
 .pytype/
 
+/static
+.idea
