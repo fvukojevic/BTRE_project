@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
 
 from .models import Listing
+from realtors.models import Realtor
 
 
 def index(request):
@@ -16,7 +17,10 @@ def index(request):
 
 
 def listing(request, listing_id):
-    return render(request, 'listings/listing.html')
+    listing = get_object_or_404(Listing, pk=listing_id)
+    mvp_realtors = Realtor.objects.filter(is_mvp=True)
+    context = {'listing': listing, 'mvp_realtors': mvp_realtors}
+    return render(request, 'listings/listing.html', context)
 
 
 def search(request):
