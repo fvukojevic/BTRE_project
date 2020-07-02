@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load humanize %}
 
+{% block title %}
+    | Home
+{% endblock %}
+
 {% block content %}
     <!-- Showcase -->
     <section id="showcase">
@@ -33,9 +37,9 @@
                                     <label class="sr-only">State</label>
                                     <select name="state" class="form-control">
                                         <option selected="true" disabled="disabled">State (All)</option>
-                                       {% for key, value in state_choices.items %}
-                                           <option value="{{ key }}">{{ value }}</option>
-                                       {% endfor %}
+                                        {% for key, value in state_choices.items %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -45,17 +49,17 @@
                                     <label class="sr-only">Bedrooms</label>
                                     <select name="bedrooms" class="form-control">
                                         <option selected="true" disabled="disabled">Bedrooms (All)</option>
-                                       {% for key, value in bedroom_choices.items %}
-                                           <option value="{{ key }}">{{ value }}</option>
-                                       {% endfor %}
+                                        {% for key, value in bedroom_choices.items %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <select name="price" class="form-control" id="type">
                                         <option selected="true" disabled="disabled">Max Price (Any)</option>
-                                       {% for key, value in price_choices.items %}
-                                           <option value="{{ key }}">{{ value }}</option>
-                                       {% endfor %}
+                                        {% for key, value in price_choices.items %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -67,9 +71,14 @@
         </div>
     </section>
 
+    <br>
+    <!-- Alerts -->
+    {% include 'partials/_alerts.html' %}
+
     <!-- Listings -->
     <section id="listings" class="py-5">
         <div class="container">
+
             <h3 class="text-center mb-3">Latest Listings</h3>
             <div class="row">
                 {% if listings %}
@@ -118,7 +127,8 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
+                                    <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More
+                                        Info</a>
                                 </div>
                             </div>
                         </div>

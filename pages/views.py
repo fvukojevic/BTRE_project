@@ -14,7 +14,6 @@ def index(request):
         'bedroom_choices': bedroom_choices,
         'price_choices': price_choices
     }
-    print(state_choices)
     return render(request, 'pages/index.html', context)
 
 
