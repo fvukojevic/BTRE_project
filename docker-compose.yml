@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12.0-alpine
+    environment:
+      - POSTGRES_DB=btre
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+  web:
+    build:
+      context: ./
+      dockerfile: docker/python/Dockerfile
+    command: python manage.py runserver 0.0.0.0:80
+    volumes:
+      - static_volume:/home/app/web/static
+    expose:
+      - 80
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - db
+
+  nginx:
+    build: docker/nginx
+    volumes:
+      - static_volume:/home/app/web/static
+    ports:
+      - 1337:80
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:
+  static_volume:
